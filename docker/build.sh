@@ -23,10 +23,16 @@ main() {
 
   echo "Building Docker image..."
   eval "$CMD"
-  echo ""
-  echo "Docker image built and tagged as:"
-  echo "  $IMAGE_NAME:$VERSION"
-  echo "  $IMAGE_NAME:latest"
+  
+  if [ $? -eq 0 ]; then
+    echo ""
+    echo "Docker image built and tagged as:"
+    echo "  $IMAGE_NAME:$VERSION"
+    echo "  $IMAGE_NAME:latest"
+  else
+    echo "Docker build failed"
+    exit 1
+  fi
 
 
 # Optionally, push the images to a Docker registry (uncomment if needed)
