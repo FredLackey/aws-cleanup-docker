@@ -10,12 +10,6 @@ main() {
     exit 1
   fi
 
-  # local CMD="docker build \
-  #   --platform linux/amd64 \
-  #   -t $IMAGE_NAME:$VERSION \
-  #   -t $IMAGE_NAME:latest \
-  #   ."
-
   local CMD="docker build \
     -t $IMAGE_NAME:$VERSION \
     -t $IMAGE_NAME:latest \
