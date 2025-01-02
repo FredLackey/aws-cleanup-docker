@@ -62,7 +62,7 @@ WORKDIR /root
 
 COPY scripts/. /root/
 
-RUN chmod +x /root/*.sh
-RUN chmod +x /root/commands/*.sh
-RUN chmod +x /root/helpers/*.sh
-RUN chmod +x /root/utils/*.sh
+# RUN chmod +x /root/*.sh
+# RUN chmod +x /root/commands/*.sh
+# RUN chmod +x /root/helpers/*.sh
+# RUN chmod +x /root/utils/*.sh
