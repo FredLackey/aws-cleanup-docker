@@ -19,7 +19,7 @@ shutdown_all_ec2() {
     instance_id=$(echo "$instance" | jq -r '.InstanceId')
     instance_name=$(echo "$instance" | jq -r '([.Tags[]? | select(.Key=="Name").Value] | first // "<unnamed>")')
     instance_state=$(echo "$instance" | jq -r '.State.Name')
-    echo "      - $instance_id ($instance_name) - $instance_state"
+    echo "        - $instance_id ($instance_name) - $instance_state"
   done < <(echo "$all_instances_json" | jq -c '.')
   
   if [ ! -z "$running_instances_json" ]; then
@@ -27,7 +27,7 @@ shutdown_all_ec2() {
     while IFS= read -r instance; do
       instance_id=$(echo "$instance" | jq -r '.InstanceId')
       instance_name=$(echo "$instance" | jq -r '([.Tags[]? | select(.Key=="Name").Value] | first // "<unnamed>")')
-      echo "      - $instance_id ($instance_name) - stopping..."
+      echo "        - $instance_id ($instance_name) - stopping..."
       
       if ! aws ec2 stop-instances --instance-ids "$instance_id" --no-cli-pager >/dev/null 2>&1; then
         echo "    Error: Failed to stop instance $instance_id"

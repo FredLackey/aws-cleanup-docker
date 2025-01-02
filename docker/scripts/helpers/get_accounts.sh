@@ -2,8 +2,7 @@
 
 get_accounts() {
 
-  # local config_file="/var/cleanup/config/accounts.json"
-  local config_file="/Users/flackey/Source/fredlackey/public/aws-cleanup-docker/tests-accounts.json"
+  local config_file="/var/aws-cleanup/config/accounts.json"
 
   local accounts
 

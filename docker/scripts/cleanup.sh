@@ -27,7 +27,7 @@ main() {
   local accounts
 
   export TIMESTAMP=$(TZ='America/New_York' date '+%Y%m%d%H%M%S')
-  # export INVENTORY_BASE="/Users/flackey/Source/fredlackey/public/aws-cleanup-docker/scrap/output"
+  export INVENTORY_BASE="/var/aws-cleanup/storage"
 
   # Get accounts from config file
   if ! accounts=$(get_accounts); then

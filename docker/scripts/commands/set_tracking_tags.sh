@@ -27,13 +27,13 @@ set_tracking_tags() {
     catalog_date=$(echo "$instance" | jq -r '([.Tags[]? | select(.Key=="CATALOG_DATE").Value] | first // "")')
     
     if [ -z "$catalog_date" ]; then
-      echo "      - $instance_id ($instance_name): Setting CATALOG_DATE to $TIMESTAMP"
+      echo "        - $instance_id ($instance_name): Setting CATALOG_DATE to $TIMESTAMP"
       aws ec2 create-tags --resources "$instance_id" --tags "Key=CATALOG_DATE,Value=$TIMESTAMP" --no-cli-pager >/dev/null 2>&1
       if [ $? -ne 0 ]; then
         echo "        Error: Failed to set tag for EC2 instance $instance_id"
       fi
     else
-      echo "      - $instance_id ($instance_name) cataloged $catalog_date"
+      echo "        - $instance_id ($instance_name) cataloged $catalog_date"
     fi
     instance_count=$((instance_count + 1))
   done < <(echo "$all_instances_json" | jq -c '.')
@@ -54,13 +54,13 @@ set_tracking_tags() {
     catalog_date=$(echo "$tags_json" | jq -r '([.TagList[]? | select(.Key=="CATALOG_DATE").Value] | first // "")')
     
     if [ -z "$catalog_date" ]; then
-      echo "      - $db_identifier: Setting CATALOG_DATE to $TIMESTAMP"
+      echo "        - $db_identifier: Setting CATALOG_DATE to $TIMESTAMP"
       aws rds add-tags-to-resource --resource-name "$arn" --tags "Key=CATALOG_DATE,Value=$TIMESTAMP" --no-cli-pager >/dev/null 2>&1
       if [ $? -ne 0 ]; then
         echo "        Error: Failed to set tag for RDS instance $db_identifier"
       fi
     else
-      echo "      - $db_identifier cataloged $catalog_date"
+      echo "        - $db_identifier cataloged $catalog_date"
     fi
     instance_count=$((instance_count + 1))
   done < <(echo "$rds_instances_json" | jq -r '.DBInstances[]' | jq -c '.')
