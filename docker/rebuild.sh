@@ -23,13 +23,6 @@ main() {
   echo "  $IMAGE_NAME:$VERSION"
   echo "  $IMAGE_NAME:latest"
 
-
-# Optionally, push the images to a Docker registry (uncomment if needed)
-# docker push "$IMAGE_NAME:$VERSION"
-# docker push "$IMAGE_NAME:latest"
-
-# echo "Docker image built and tagged as $IMAGE_NAME:$VERSION and $IMAGE_NAME:latest"
-
 }
 
 main "$@"

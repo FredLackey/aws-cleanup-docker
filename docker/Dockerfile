@@ -2,19 +2,19 @@ FROM ubuntu:20.04
 
 LABEL maintainer="fred.lackey@gmail.com"
 LABEL author="fred.lackey@gmail.com"
-LABEL version="202412311253"
+LABEL version="202501011247"
 LABEL description="AWS Cleanup"
 
 # ------------------------------------------------------------------------------------------------
 # Install dependencies
 # ------------------------------------------------------------------------------------------------
-
+  
+RUN echo "America/New_York" > /etc/timezone
 RUN apt update
 RUN apt upgrade -y
 RUN apt install -y curl software-properties-common wget gnupg unzip vim jq
+# RUN cp /usr/share/zoneinfo/America/New_York /etc/localtime
 
-RUN cp /usr/share/zoneinfo/America/New_York /etc/localtime
-RUN echo "America/New_York" > /etc/timezone
 RUN apt install -y git-all
 
 # ------------------------------------------------------------------------------------------------
@@ -59,5 +59,5 @@ ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 # ------------------------------------------------------------------------------------------------
 
 WORKDIR /root
-COPY scripts/cleanup-instances.sh /root/cleanup-instances.sh
-RUN chmod +x /root/cleanup-instances.sh
+
+COPY scripts/. /root/
